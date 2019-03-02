@@ -62,6 +62,10 @@
 			cancelNode: function() {
 				return '<span class="btn glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>';
 			},
+			maxResults: -1,
+			maxResultsNode: function(data) {
+				return '<span class="list-groiup-item well">Too many results - keep typing to refine</span>';
+			},
 			loadingClass: 'bts-loading-list',
 			itemClassTmp: 'bts-dynamic-item',
 			itemEl: '.list-group-item',
@@ -152,8 +156,12 @@
 						if(!data || data.length===0)
 							$( opts.emptyNode.call(self, val) ).addClass(opts.itemClassTmp).appendTo(searchlist$);
 						else
-							for(var i in data)
-								$( opts.sourceNode.call(self, data[i]) ).addClass(opts.itemClassTmp).appendTo(searchlist$);
+							if (opts.maxResults < 0 || data.length <= opts.maxResults) {
+								for (var i in data)
+									$(opts.sourceNode.call(self, data[i])).addClass(opts.itemClassTmp).appendTo(searchlist$);
+							} else {
+								$(opts.maxResultsNode(data)).addClass(opts.itemClassTmp).appendTo(searchlist$);
+							}
 
 						searchlist$.removeClass(opts.loadingClass);
 					});
