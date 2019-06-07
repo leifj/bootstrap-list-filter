@@ -64,7 +64,7 @@
 			},
 			maxResults: -1,
 			maxResultsNode: function(data) {
-				return '<span class="list-groiup-item well">Too many results - keep typing to refine</span>';
+				return '<span class="list-groiup-item well">Too many results - keep typing to refine search</span>';
 			},
 			loadingClass: 'bts-loading-list',
 			itemClassTmp: 'bts-dynamic-item',
